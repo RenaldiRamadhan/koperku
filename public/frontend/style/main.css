@@ -119,7 +119,7 @@ header .btn-get-started:hover {
 .section-popular-content .section-popular-travel .card-travel {
     min-height: 380px;
     background-color: #ffff;
-    color: #ffff;
+    color: rgb(0, 0, 0);
     padding: 30px;
     background-size: cover;
     margin-bottom: 20px;
@@ -127,7 +127,7 @@ header .btn-get-started:hover {
 
 .section-popular-content .section-popular-travel .travel-country {
     font-size: 18px;
-    color: #ffff;
+    color: rgb(0, 0, 0);
 }
 
 .section-popular-content .section-popular-travel .travel-location {

@@ -11,9 +11,8 @@
   
     </head>
     <body>
-    
+    @include('includes.home.navbar-home')
     @yield('content')
-
     @stack('prepend-script')
     @include('includes.script')
     @stack('addon-script')

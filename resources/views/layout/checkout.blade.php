@@ -11,7 +11,7 @@
   
     </head>
     <body>
-    
+      @include('includes.home.navbar-home')
     @yield('content')
     @include('includes.footer')
     @stack('prepend-script')

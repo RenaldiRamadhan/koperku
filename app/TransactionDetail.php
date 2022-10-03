@@ -11,7 +11,7 @@ class TransactionDetail extends Model
 
     protected $table = "transaction_details";
     protected $fillable = [
-        'transactions_id', 'username', 'nationality', 'is_visa', 'doe_passport'
+        'transaction_id', 'username', 'nationality', 'is_visa', 'doe_passport'
     ];
 
     protected $hidden = [];
@@ -20,6 +20,7 @@ class TransactionDetail extends Model
 
     public function transaction()
     {
-        return $this->belongsTo(Transaction::class, 'transactions_id', 'id');
+        
+        return $this->belongsTo(Transaction::class, 'transaction_id', 'id');
     }
 }

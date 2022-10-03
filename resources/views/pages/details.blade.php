@@ -1,6 +1,5 @@
 @extends('layout.app')
 @section('title,Detail Travel')
-
 @section('content')
     <main>
     <section class="section-details-header"></section>
@@ -24,67 +23,49 @@
           <div class="col-lg-8 pl-lg-0">
             <div class="card card-details">
               <h1>
-                Maldives Island
+               {{ $item->title }}
               </h1>
               <p>
-                Maldives
+                {{ $item->location }}
               </p>
-              <div class="gallery">
-                <div class="xzoom-cointainer">
-                  <img src="frontend/image/Mask Group 3.jpg" class="xzoom" id="xzoom-default" xoriginal="frontend/image/Mask Group 3.jpg">
-                </div>
-                <div class="xzoom-thumbs">
-                  <a href="frontend/image/gl1 cpy.jpg">
-                    <img src="frontend/image/gl1 cpy.jpg" class="xzoom-gallery" width="128" xpreview="frontend/image/gl1 cpy.jpg">
-                  </a>
-                  <a href="frontend/image/gl2 cpy.jpg">
-                    <img src="frontend/image/gl2 cpy.jpg" class="xzoom-gallery" width="128" xpreview="frontend/image/gl2 cpy.jpg">
-                  </a>
-                  <a href="frontend/image/gl3 cpy.jpg">
-                    <img src="frontend/image/gl3 cpy.jpg" class="xzoom-gallery" width="128" xpreview="frontend/image/gl3 cpy.jpg">
-                  </a>
-                  <a href="frontend/image/gl4 cpy.jpg">
-                    <img src="frontend/image/gl4 cpy.jpg" class="xzoom-gallery" width="128" xpreview="frontend/image/gl4 cpy.jpg">
-                  </a>
-                  <a href="ffrontend/image/gl5 cpy.jpg">
-                    <img src="frontend/image/gl5 cpy.jpg" class="xzoom-gallery" width="128" xpreview="frontend/image/gl5 cpy.jpg">
-                  </a>
-                </div>
+             @if($item->galleries->count())
+             <div class="gallery">
+              <div class="xzoom-cointainer">
+                <img src="{{ Storage::url($item->galleries->first()->image) }}" class="xzoom" id="xzoom-default" xoriginal="{{ Storage::url($item->galleries->first()->image) }}">
               </div>
+              <div class="xzoom-thumbs">
+                @foreach ($item->galleries as $gallery)
+                <a href="{{ Storage::url($gallery->image) }}">
+                  <img src="{{ Storage::url($gallery->image) }}" class="xzoom-gallery" width="128" xpreview="{{ Storage::url($gallery->image) }}">
+                </a>
+                @endforeach
+              </div>
+            </div>
+             @endif
               <h2>Tentang Wisata</h2>
               <p>
-                The Maldives are known as “the tropical paradise” for reasons such as its beauty. 
-        This tropical country has separated islands and islands are surrounded by its own lagoon.
-        Each island has pure white sandy beaches. The sea covers 99% of the Maldives and it is
-        where you can see beautiful fishes and corals. There are over five thousand coral reefs and
-        plenty of reef fish, corals, and many other marine lives you could see underwater. Diving in
-        the Maldives would be memorable
-                    </p>
-                    <p>
-                        Maldives is an ideal destination for a family holiday or a honeymoon trip where you can
-        enjoy and have a memorable vacation. Visiting and exploring the beauty of the Maldives
-        would be a wonderful experience.
+                {!! $item->about !!}
               </p>
               <div class="features row">
                 <div class="col-md-4">
-                  <div class="description"><img src="frontend/image/Group 20.png" alt="" class="feature-image"></div>
+                  <div class="description"><img src="{{ url('frontend/image/Group 20.png') }}" alt="" class="feature-image"></div>
                   <div class="description">
                     <h3>Featured Event</h3>
-                    <p>Maldivian Festivals</p>
+                    <p>{{$item->featured_event}}</p>
                   </div>
                 </div>
                 <div class="col-md-4 border-left">
-                  <div class="description"><img src="frontend/image/Group 21.png" alt="" class="feature-image"></div>
+                  <div class="description"><img src="{{ url('frontend/image/Group 21.png') }}" alt="" class="feature-image"></div>
                   <div class="description">
                     <h3>Language</h3>
-                    <p>Dhivehi</p>
+                    <p>{{$item->language}}</p>
                   </div>
                 </div>
                 <div class="col-md-4 border-left">
-                  <div class="description"><img src="frontend/image/Group 22.png" alt="" class="feature-image"></div>
+                  <div class="description"><img src="{{ url('frontend/image/Group 22.png') }}" alt="" class="feature-image"></div>
                   <div class="description">
                     <h3>Foods</h3>
-                    <p>Local Foods</p>
+                    <p>{{$item->foods}}</p>
                   </div>
                 </div>
             </div>
@@ -94,11 +75,11 @@
           <div class="card card-details card-right">
             <h2>Members are going</h2>
             <div class="members my-2">
-              <img src="frontend/image/Foto_Members Going_1.png"  class="member-image mr-1">
-              <img src="frontend/image/Foto_Members Going_2.png"  class="member-image mr-1">
-              <img src="frontend/image/Foto_Members Going_3.png"  class="member-image mr-1">
-              <img src="frontend/image/Foto_Members Going_4.png"  class="member-image mr-1">
-              <img src="frontend/image/Foto_Members Going_5.png"  class="member-image mr-1">
+              <img src="{{ url('frontend/image/Foto_Members Going_1.png') }}"  class="member-image mr-1">
+              <img src="{{ url('frontend/image/Foto_Members Going_2.png') }}"  class="member-image mr-1">
+              <img src="{{ url('frontend/image/Foto_Members Going_3.png') }}"  class="member-image mr-1">
+              <img src="{{ url('frontend/image/Foto_Members Going_4.png') }}"  class="member-image mr-1">
+              <img src="{{ url('frontend/image/Foto_Members Going_5.png') }}"  class="member-image mr-1">
               <div class="members my-2">
               </div>
             </div>
@@ -107,26 +88,35 @@
             <table class="trip-information">
               <tr>
                 <th width="50%">Date of Departure</th>
-                <td width="50%">5 Aug,22</td>
+                <td width="50%">{{ \carbon\carbon::create($item->departure_date)->format('F n,Y') }}
+                </td>
               </tr>
               <tr>
                 <th width="50%">Duration</th>
-                <td width="50%">4D 3N</td>
+                <td width="50%">{{ $item->duration }}</td>
               </tr>
               <tr>
                 <th width="50%">Type</th>
-                <td width="50%">Open Trip</td>
+                <td width="50%">{{ $item->type}}</td>
               </tr>
               <tr>
                 <th width="50%">Price</th>
-                <td width="50%">$ 80,00/ person</td>
+                <td width="50%">${{ $item->price }},00/Person</td>
               </tr>
             </table>
           </div>
           <div class="join-container">
-            <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now mt-3 py-2">
-              Join Now
-            </a>
+           @auth
+               <form action="{{ route('checkout_process', $item->id)}}" method="post">
+                @csrf
+                <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">Join Now</button>
+               </form>
+           @endauth
+           @guest
+           <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">
+            Login or Register to Join
+          </a>
+           @endguest
           </div>
         </div>
       </div>

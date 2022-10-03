@@ -2,25 +2,7 @@
 @section('title,success')
 
 @section('content')
-        <!-- Navbar -->
-        <div class="container">
-          <nav class="row navbar navbar-expand-lg navbar-light bg-white">
-              <div
-                  class="navbar-nav ml-auto mr-auto mr-sm-auto mr-lg-0 mr-md-auto"
-              >
-                  <a href="{{ route('checkout-success') }}" class="navbar-brand">
-                      <img src="{{ url('frontend/image/koperku.png') }}" alt="" />
-                  </a>
-              </div>
-              <ul class="navbar-nav mr-auto d-nonne d-lg-block">
-                  <li>
-                      <span class="text-muted">
-                          | &nbsp; Explore beautiful places in the world
-                      </span>
-                  </li>
-              </ul>
-          </nav>
-      </div>
+      
     <main>
         <div class="section-success d-flex align-items-center">
           <div class="col text-center">
